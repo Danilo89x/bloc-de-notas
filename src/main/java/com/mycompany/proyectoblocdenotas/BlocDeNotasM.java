@@ -4,6 +4,13 @@
  */
 package com.mycompany.proyectoblocdenotas;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author danilo
@@ -60,6 +67,11 @@ public class BlocDeNotasM extends javax.swing.JFrame {
         jMenu2.add(jMenuItem1);
 
         jMenuItem2.setText("Abrir");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem2);
 
         jMenuItem3.setText("Guardar");
@@ -91,6 +103,28 @@ public class BlocDeNotasM extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        
+        JFileChooser fChoosser = new JFileChooser();
+        int opcion = fChoosser.showOpenDialog(this);
+        
+        if (opcion == JFileChooser.APPROVE_OPTION) {
+            File archivo = fChoosser.getSelectedFile();
+            BufferedReader br;
+            try {
+                br = new BufferedReader(new FileReader(archivo));
+                   jTextArea1.read(br, null);
+            } catch (FileNotFoundException ex) {
+                System.getLogger(BlocDeNotasM.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            } catch (IOException ex) {
+                System.getLogger(BlocDeNotasM.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+            
+         
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
